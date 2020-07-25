@@ -1,0 +1,16 @@
+{
+  "name": "com.yean.materialcreator",
+  "version": "1.0.0",
+  "displayName": "Material Creator",
+  "description": "This tool will create a standard material from a selection of folders or textures through the click of a button",
+  "unity": "2018.4",
+  "keywords": [
+    "material",
+    "textures",
+    "assign"
+  ],
+  "author": {
+    "name": "Yean",
+    "email": "yean.unity@gmail.com"
+  }
+}
