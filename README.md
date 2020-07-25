@@ -26,3 +26,5 @@ Note:
 Check the "delete original textures" checkmark if you're sure your texture selection is correct.
 Otherwise the material creator might not assign the newly merged texture.
 The option is merely there if you want to try out the texture merging first without deleting both textures.
+
+![](mat creator.gif)
