@@ -16,6 +16,7 @@ If you select 1 folder or a set of textures for 1 material you can fill in the o
 **TEXTURES:**
 
 There's an option to merge your gloss and opacity to your metal/spec and albedo texture alpha channels respectively without using third party tools.
+
 Select the directory containing the textures or the "metalness & gloss" or "albedo & opacity" separately and push the merge buttons.
 If you have a roughness instead of a gloss texture you can check the "Invert roughness" checkmark.
 
