@@ -3,7 +3,7 @@ You can also merge your metal/spec-gloss and albedo-opacity textures without usi
 
 Open tool by going to "Tools->Material Creator"
 
-MATERIAL:
+# MATERIAL:
 Just select your folders containing your material's textures or the textures itself and push the CREATE MATERIAL button.
 A material will be created in the same path as your selection with the assigned textures.
 
@@ -11,7 +11,7 @@ If you select several folders, don't fill in the object name. The creator will t
 
 If you select 1 folder or a set of textures for 1 material you can fill in the object name manually.
 
-TEXTURES:
+# TEXTURES:
 There's an option to merge your gloss and opacity to your metal/spec and albedo texture alpha channels respectively without using third party tools.
 Select the directory containing the textures or the "metalness & gloss" or "albedo & opacity" separately and push the merge buttons.
 If you have a roughness instead of a gloss texture you can check the "Invert roughness" checkmark.
