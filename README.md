@@ -2,9 +2,11 @@
 This tool will create a standard material from a selection of folders or textures through the click of a button.
 You can also merge your metal/spec-gloss and albedo-opacity textures without using third party software.
 
-**Download the zip and extract it in your Unityproject/Packages folder**
-
-Open tool by going to "Tools->Material Creator"
+## Install instructions
+1. Download zip
+2. Extract folder
+3. In unity package manager select "Install from disk" and select .Json file from extracted folder
+4. Open tool by going to "Tools->Material Creator"
 
 **MATERIAL:**
 
