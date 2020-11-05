@@ -1,16 +1,28 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.IO;
-//using Unity.EditorCoroutines.Editor;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 namespace MaterialCreator {
     public class CreateMaterials : EditorWindow {
 
-        
+        /*
+
+        TODO:
+        Scan for shader type automatically    
+        Handle when textures contain variations in same folder
+        One button for merging + making material
+
+        DONE:
+        Scan if directory or texture selected
+        Fix read/write error
+        Multiple folders
+        Texture Types
+
+         */
+
         Shader shader;
 
         public string materialName = "";
@@ -24,7 +36,7 @@ namespace MaterialCreator {
         List<string> albedoNames = new List<string> { "base", "albedo", "diffuse", "dfs", "color" };
         List<string> opacityNames = new List<string> { "opacity", "alpha" };
         List<string> metallicNames = new List<string> { "metallic", "metal" };
-        List<string> specularNames = new List<string> { "spec" };
+        List<string> specularNames = new List<string> { "spec", "reflection" };
         List<string> smoothnessNames = new List<string> { "gloss", "smoothness", "roughness" };
         List<string> heightNames = new List<string> { "height" };
         List<string> normalNames = new List<string> { "normal", "nrm" };
