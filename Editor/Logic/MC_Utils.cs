@@ -4,9 +4,21 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace MaterialCreator {
     public class MC_Utils {
+
+        public enum Pipeline {
+            BuiltIn,
+            URP,
+            HDRP
+        }
+
+        public enum ShaderType {
+            Specular,
+            Metallic
+        }
 
         //Check if the selected object is a directory
         public static bool AssetIsDirectory(UnityEngine.Object selection) {
@@ -21,7 +33,23 @@ namespace MaterialCreator {
             }
         }
 
-        
+        public static Pipeline GetPipeline() {
+            if (GraphicsSettings.defaultRenderPipeline != null) {
+                if (GraphicsSettings.defaultRenderPipeline.GetType().Name == "HDRenderPipelineAsset") {
+                    //Debug.Log("High Definition Render Pipeline (HDRP) is being used.");
+                    return Pipeline.HDRP;
+                } else if (GraphicsSettings.defaultRenderPipeline.GetType().Name == "UniversalRenderPipelineAsset") {
+                    //Debug.Log("Universal Render Pipeline (URP) is being used.");
+                    return Pipeline.URP;
+                } else {
+                    Debug.LogWarning("Unknown Render Pipeline. Defaulting to Built-in.");
+                    return Pipeline.BuiltIn;
+                }
+            } else {            
+                return Pipeline.BuiltIn;
+            }
+        }
+                
         //Return a list of textures from a directory
         public static List<Texture2D> CollectTexturesInDirectory(UnityEngine.Object directory) {
             string[] filePaths = Directory.GetFiles(AssetDatabase.GetAssetPath(directory));
@@ -193,7 +221,6 @@ namespace MaterialCreator {
             data = ts.GetData();
 
             return data;
-        }
-        
+        }        
     } 
 }

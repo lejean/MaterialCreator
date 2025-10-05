@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 namespace MaterialCreator {
     // Create a new type of Settings Asset.
     class MC_Settings : ScriptableObject {
-        public const string k_MyCustomSettingsPath = "Assets/Editor/MC_Settings.asset";
+        public const string k_MyCustomSettingsPath = k_MyCustomSettingsFilePath + k_MyCustomSettingsFileName;
+        public const string k_MyCustomSettingsFilePath = "Assets/Settings/MaterialCreator/";
+        public const string k_MyCustomSettingsFileName = "MC_Settings.asset";
 
         [Header("Material Creator")]
         //lower case search terms, all strings get checked when lower case
@@ -21,6 +24,10 @@ namespace MaterialCreator {
         public List<string> detailNames = new List<string> { "detail" };
 
         internal static MC_Settings GetOrCreateSettings() {
+            if (!AssetDatabase.AssetPathExists(k_MyCustomSettingsPath)) {
+                Directory.CreateDirectory(Path.GetDirectoryName(k_MyCustomSettingsFilePath));
+            }
+                
             var settings = AssetDatabase.LoadAssetAtPath<MC_Settings>(k_MyCustomSettingsPath);
             if (settings == null) {
                 settings = ScriptableObject.CreateInstance<MC_Settings>();
@@ -34,5 +41,4 @@ namespace MaterialCreator {
             return new SerializedObject(GetOrCreateSettings());
         }
     }
-
 }

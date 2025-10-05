@@ -57,15 +57,6 @@ namespace MaterialCreator {
             foreach (var tex in textures) {
                 switch (mergeModel.ShaderType) {
                     case 0:
-                        if (metallicNames.Any(s => tex.name.ToLower().Contains(s))) {
-                            textureName = tex.name;
-                            metalSpecPath = AssetDatabase.GetAssetPath(tex);
-                            metal_spec = MC_Utils.DuplicateTexture(tex);
-                            continue;
-                        }
-                        break;
-
-                    case 1:
                         if (specularNames.Any(s => tex.name.ToLower().Contains(s))) {
                             textureName = tex.name;
                             metalSpecPath = AssetDatabase.GetAssetPath(tex);
@@ -73,6 +64,14 @@ namespace MaterialCreator {
                             continue;
                         }
                         break;
+                    case 1:
+                        if (metallicNames.Any(s => tex.name.ToLower().Contains(s))) {
+                            textureName = tex.name;
+                            metalSpecPath = AssetDatabase.GetAssetPath(tex);
+                            metal_spec = MC_Utils.DuplicateTexture(tex);
+                            continue;
+                        }
+                        break;                    
                 }
 
                 if (smoothnessNames.Any(s => tex.name.ToLower().Contains(s))) {
@@ -89,23 +88,6 @@ namespace MaterialCreator {
             switch (mergeModel.ShaderType) {
                 case 0:
                     if (mergeModel.MaterialName == "") {
-                        //remove the metallic names from the texture name
-                        foreach (var metalName in metallicNames) {
-                            textureName = textureName.Replace(metalName, "");
-                        }
-
-                        //remove the smoothness names from the texture name
-                        foreach (var smoothnessName in smoothnessNames) {
-                            textureName = textureName.Replace(smoothnessName, "");
-                        }
-
-                        textureName += " metal smoothness";
-                    } else {
-                        textureName = mergeModel.MaterialName + " metal smoothness";
-                    }
-                    break;
-                case 1:
-                    if (mergeModel.MaterialName == "") {
                         //remove the specular names from the texture name
                         foreach (var specularName in specularNames) {
                             textureName = textureName.Replace(specularName, "");
@@ -119,6 +101,23 @@ namespace MaterialCreator {
                         textureName += " spec smoothness";
                     } else {
                         textureName = mergeModel.MaterialName + " spec smoothness";
+                    }
+                    break;
+                case 1:
+                    if (mergeModel.MaterialName == "") {
+                        //remove the metallic names from the texture name
+                        foreach (var metalName in metallicNames) {
+                            textureName = textureName.Replace(metalName, "");
+                        }
+
+                        //remove the smoothness names from the texture name
+                        foreach (var smoothnessName in smoothnessNames) {
+                            textureName = textureName.Replace(smoothnessName, "");
+                        }
+
+                        textureName += " metal smoothness";
+                    } else {
+                        textureName = mergeModel.MaterialName + " metal smoothness";
                     }
                     break;
                 default:

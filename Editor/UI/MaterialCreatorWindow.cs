@@ -7,6 +7,8 @@ namespace MaterialCreator {
         public string materialName = "";
         public int shaderType = 0;
 
+        Shader shader;
+
         CreateMaterials createController;
 
         [MenuItem("Tools/Material Creator/Make Material")]
@@ -39,8 +41,8 @@ namespace MaterialCreator {
             materialTitle.fontSize = 15;
             GUILayout.Label("Create Material", materialTitle);
 
-            string[] options = new string[] { "Metallic", "Specular" };
-            shaderType = EditorGUILayout.Popup("Shader type", shaderType, options);
+            string[] shaderType = System.Enum.GetNames(typeof(MC_Utils.ShaderType));
+            this.shaderType = EditorGUILayout.Popup("Shader type", this.shaderType, shaderType);
             GUILayout.Space(10);
                         
             materialName = EditorGUILayout.TextField("Material Name", materialName);
@@ -48,28 +50,31 @@ namespace MaterialCreator {
                 "Leave empty when selecting multiple folders", EditorStyles.helpBox);
             GUILayout.Space(10);
 
+            //if you want to assign a custom shader, pass this shader to the create material function
+            //shader = (Shader)EditorGUILayout.ObjectField("Shader", shader, typeof(Shader), false);
+
             var boldtext = new GUIStyle(GUI.skin.button);
             boldtext.fontStyle = FontStyle.Bold;
             boldtext.fontSize = 15;
 
             if (GUILayout.Button("Create Material", boldtext, GUILayout.Height(40))) {
-                createController.CreateMaterial(shaderType, materialName);
+                createController.CreateMaterial(this.shaderType, MC_Utils.GetPipeline(), materialName);
             }        
         }
 
         //Assets adds it to the right click menu in projects and the topmenu Assets (which is the same)
-        [MenuItem("Assets/Tools/Material Creator/Create Material Standard")]
+        [MenuItem("Assets/Tools/Material Creator/Create Material Standard(Specular)")]
         static void CreateMaterialSpecular() {
-            //0 is metal, 1 specular
+            //0 is spec, 1 metal
             CreateMaterials create = new();
-            create.CreateMaterial(0);
+            create.CreateMaterial(0, MC_Utils.GetPipeline());
         }
 
-        [MenuItem("Assets/Tools/Material Creator/Create Material Standard(Specular)")]
+        [MenuItem("Assets/Tools/Material Creator/Create Material Standard")]
         static void CreateMaterialMetal() {
-            //0 is metal, 1 specular
+            //0 is spec, 1 metal
             CreateMaterials create = new();
-            create.CreateMaterial(1);
+            create.CreateMaterial(1, MC_Utils.GetPipeline());
         }        
     }
 }

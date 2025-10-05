@@ -35,7 +35,7 @@ namespace MaterialCreator {
             GUILayout.Label("Texture Tools",textureTitle);
             GUILayout.Space(10);
 
-            string[] options = new string[] { "Metallic", "Specular" };
+            string[] options = System.Enum.GetNames(typeof(MC_Utils.ShaderType));
             shaderType = EditorGUILayout.Popup("Shader type", shaderType, options);
             GUILayout.Space(10);
                         
